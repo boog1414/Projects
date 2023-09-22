@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>The Software Development Page</title>
+    <meta charset="utf-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'gold/style.css' %}" type="text/css">
+    <style>
+        body{
+        background-color: lightblue;}
+
+
+    </style>
+</head>
+
+<body>
+<div class="stuff-box magenta">
+    {% include 'navBar.html' %}
+</div>
+<div style="background-color: gray">
+    <div style="background-color: teal">
+        <h1>Requirements Specifications</h1>
+        <p> create a new app called unitconv. it includes a view called convert, responds to get requests from this form
+            http://localhost:8000/unitconv/convert?from=lb&to=t_oz&value=3.14159Links. Convert pounds into troy ounces.
+            from - a string which id's the type of units of input
+            value - non neg floating point of the from units.
+            to - a string rep of the type of units the user wants value converted into</p>
+        <h3>valid request is a JSON object</h3>
+        <p>
+            { "units": "t_oz",
+            "value": 45.788681936121094,
+            }
+            value - non neg floating point num representing the number of units. units - id the units of the output
+            value, must match
+            the "to" param of the request</p>
+        <h3>invalid query</h3>
+        <p>JSON object indicating to an error message is returned instead. simple message = "invalid unit conversion
+            request"</p>
+        <h3>calculations</h3>
+        <p>consult a table of conversion factors stored in a django model.</p>
+        <ul>
+            <li>sensible simple schema for model</li>
+            <li>algorithm that converts one unit of measure into another</li>
+            <li>create data migration with necessary unit conversion factors. only place to hard code the conversion
+                factors
+            </li>
+        </ul>
+        <h2>Mini conversion API</h2>
+        <ul>
+            <li>U.S. Ton (T)</li>
+            <li>Gram (g)</li>
+            <li>Troy Ounce (t_oz)</li>
+            <li>kilogram (kg)</li>
+            <li>Imperial Pound (lb)</li>
+            <li>Ounce (oz)</li>
+        </ul>
+        <p>Must be capable of converting between all units</p>
+        <p>use the abbreviation listed as each units name as the name as the values of the from and to
+            request/response</p>
+
+        <h1>Single Page Application</h1>
+        <p>create a new django app called "gold" which serves a simple html web page presenting the a user interface
+            which allows
+            a user to find out how much their weight is worth in gold in terms of the latest market price.</p>
+        <p>you can do plain html files, not everything has to be vanilla js</p>
+
+        <h2>Saved Expressions from the database</h2>
+        <p>Django template to populate 5 most recent saved expressions. dont show this if there are no expressions.Put
+            them in a form that POST's a request to the view function that will delete the associated Expression
+            record form the data base. display expressions database ID, the expression and result, and a delete button
+            that submits the form.
+            if undefined say its undefined instead of the showing the result. if its different in javascript than in
+            python,
+            show both results and clearly label them. Display newest at the top. no forms until the user begins
+            calculating. then one form per calculation.</p>
+        <h2>min for html files</h2>
+        <ol>
+            <li>h2 and title</li>
+            <li>instructions describing how to use the app</li>
+            <li>a numeric input to accept the users weight</li>
+            <li>a select drop down menu to let the user choose a unit of weight from the table of conversion factors
+            </li>
+            <li>a button which performs the conversion</li>
+            <li>a p element which displays the latest market price of gold. have a "please wait" message. after it
+                retrieves it display it.
+                if it cant be retrieved put an error message
+            </li>
+        </ol>
+        <p>the page does a one time only link. get gold in troy ounce</p>
+        <ol>
+            <li>create an account on data.nasdaq.com</li>
+            <li>learn nasdaq data links lbma dataset</li>
+            <li>make an asynchronous GET request using fetch(), requesting the data in JSON. the reqyest must include
+                your API key
+                and a limiting range. nasdaq responds with all of the data it has since the beginning of its records.
+                learn to requet only the most recent data point.
+                extract the price in USD per troy ounce of gold from JSON payload and store it in global var to use with
+                the button.
+            </li>
+            <li>the button activate a callback that, reads the users weight from the input. Validate that the unput is
+                numeric and display an error if not.
+                do not make a fetch to your unitcov API. make a fetch request to the unitconv app that converts into
+                troy ounces.
+                extract the computed weight in troy ounces from the JSON data, and multiply it with the market price of
+                gold.
+                create a new div beneath the input section to display the resulting dollar amount. include a time stamp
+                with the output, insert new div into the DOM new results at the top,
+                clicking a div removes it from the DOM, when an error occurs displays a timestamped error message.
+            </li>
+        </ol>
+        <h2>test failures of fetch()</h2>
+        <p>look at the network tab you can configure URLs to temp block. google chrome - inspect network activity block
+            request.</p>
+        <h4>Unknowns</h4>
+        <ol>
+            <li>getting real time info from a website.</li>
+            <li>have a display message while retrieving</li>
+            <li>how to do a one time only automatic queries</li>
+            <li>how to use the fetch function.</li>
+        </ol>
+
+        <div>
+            <h1>Design</h1>
+            <p>first i need to make models and migrations. just models in the unitconv, the weight of the conversion
+            and what weight type of weight. Index html would need a number input and a drop-down menu with the available
+            types of weights, a button to call the conversion view in the unitconv. create a js file to fetch the price
+                of gold from the nasdaq website. has a function to call the convert view. Does some validation before sending
+                the info to the view using a fetch. creates new divs for each calculation and puts the newest at top.
+                can click to disappear. the view takes the price from the url and does the calculation and then sends it back
+                as json using a dictionary with "units" and "value".
+            </p>
+
+
+        </div>
+        <div>
+            <h1>Implementation</h1>
+            <p> This is a simpler version of last assignment. using a fetch with the url is a little hard but i dont think
+                it will be that bad. getting data from json is a new concept. everything else is pretty easy, we have been
+                doing it for the last couple of assignments. I am really only worried about doing the api and using fetch.
+                </p>
+        </div>
+        <div>
+            <h1>Testing and Debugging</h1>
+            <p>the fetch isnt working correctly ---- I forgot to put the api key at the back of it.</p>
+            <p>The fetch to the api isnt working ----- i didnt have it wrapped in `` I had it wrapped in "" so it wasnt taking the to and from</p>
+            <p>population isnt working, nothing is being populated. ----- I swtich the operations at the bottom for some dumb reason and so
+            it wasnt being called correctly. switched it and they popped up.</p>
+            <p>Kilograms isnt working ----- I forgot to add it to the populations page.... added it and re migrated and it worked.</p>
+            <p>The divs arent popping up at the top first ------ I looked it up online and found the insert before method.
+            added the methods in and it pops up in the correct order.</p>
+            <p></p>
+        </div>
+        <div>
+            <h1>Deployment</h1>
+            <p>
+                I committed and pushed it back and I can see it!
+            </p>
+        </div>
+        <div>
+            <h1>Maintenance</h1>
+            <p>
+                Not a lot of maintenance. The link of the fetch could break. the nasdaq could go down and that would cause the
+                program to not get the price of gold for the day and it would break. Unless they actually
+                change the js or django there isnt anything else that can break.
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>

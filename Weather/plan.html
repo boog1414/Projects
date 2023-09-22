@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>The Software Development Page</title>
+    <meta charset="utf-8">
+    <style>
+        body {
+            background-color: lightblue;
+        }
+
+
+    </style>
+</head>
+
+<body>
+
+<div>
+    <div style="background-color: red">
+        <h1>Requirements Specifications</h1>
+        <h3>Abstract api</h3>
+        <p>From the api address determine your location on earth. Use a fetch request to do it.</p>
+        <h3>weather map</h3>
+        <p>use a fetch to get the weather forcast and the 5-day weather report. do not use the one call api code. learn
+            to get the units in imperial units instead of metric.</p>
+        <h3>Veu and promises</h3>
+        <p>api must launch from Veu not from the main JavaScript. don't do Hadouken code. catch the error if api call
+            fails.</p>
+        <h3>Vue and the DOM</h3>
+        <p>No Vanilla DOM manipulation techniques. only the document object inside the event handlers. Have a "loading"
+            message while waiting for the data. Title in Large Header. Create a div to display the users lat and long,
+            city, state, and country. only display the available data. current weather data is in its own div. must
+            include</p>
+        <ul>
+            <li>Human readable date and time</li>
+            <li>current temp in F</li>
+            <li>Daily high and low temp</li>
+            <li>Sky conditions</li>
+            <li>Humidity and pressure in hPa</li>
+        </ul>
+        <p>New div for each of the 5 day/3 hour forcast. this will be 40 divs. same info as the current weather.</p>
+        <p>Has to have a "likely" "unlikely" and a "neutral". start in neutral. clicking the div cycles between the states.
+        adds a tally to number of each for each vote, always 40.</p>
+
+        <div>
+            <h1>Design</h1>
+            <p>I need to get a div that is connected to Vue. create a div to display the city, state, country, and coordinates.
+                Create data in vue. Create lat lon city state and country and set them all to undefined, so I can set them later.
+                Add Created to Vue. Have a fetch call to get the lat, lon, city, state, and country and set them to the data.
+                return the fetch to get the weather for the lat and lon you just got. add temp, high, low, humidity, and pressure
+                to the data and set them to undefined. Get the data from the fetch and link them to their correspondence in the data.
+                return the next fetch to get 5 day 3 hours. Create a div to display the weather. Create a for loop to go for all 40
+                divs. Get the response list and set it to the data. Create methods in Vue. Create a toggle method to go between
+                three different things. Do some class binding on the 40 divs that correspond to the three different options.
+                Create a computed method to get the counts. one for likely, unlikely, and neutral.
+            </p>
+
+
+        </div>
+        <div>
+            <h1>Implementation</h1>
+            <p> This is going to be a relatively easy assignment. I know how to fetch but not how to have nested fetch calls.
+                the Vue app is new, but it doesn't seem to complicated to learn. The life cycle of Vue is going to be interesting
+                understand. I haven't dealt with class binding so that will be new but I don't think to hard. I also haven't done
+                a toggle method either.
+            </p>
+        </div>
+        <div>
+            <h1>Testing and Debugging</h1>
+            <p>the fetch to get the weather isn't working correctly ---- i some how forgot the Https:// </p>
+            <p>I set the data to "" instead of undefined. It wouldn't load any of the data. </p>
+            <p>When i click on the div to vote on it, the background color for all 40 divs change. ------ I forgot to add an id
+            to each div so they were acting as one.</p>
+            <p>The time was a little rough because it looked like it was in the clouds part of the list, but it was its own thing.</p>
+
+        </div>
+        <div>
+            <h1>Deployment</h1>
+            <p>
+                I committed and pushed it back and I can see it!
+            </p>
+        </div>
+        <div>
+            <h1>Maintenance</h1>
+            <p>
+                Not a lot of maintenance. The link of the fetch could break. But other than that there really isn't much
+                that could go wrong.
+            </p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

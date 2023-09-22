@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <meta charset="utf-8">
+    <style>
+        .likely{
+            background: lawngreen;
+
+        }
+        .unlikely{
+            background: red;
+
+        }
+        .neutral{
+            background: snow;
+
+        }
+    </style>
+</head>
+<div id="currentWeather" style="background: lightblue; border-radius: 5px" >
+    <h2>{{title}}</h2>
+
+    <div style="background: darkgreen; border-radius: 5px; text-align: center">
+        <h2>Your location</h2>
+        <p>You are currently in {{city}}, {{state}}, {{country}} at the coordinates ({{latitude}}, {{longitude}}).</p>
+    </div>
+
+    <div v-if="longitude === undefined">
+        <p>Please wait for the weather to be retrieved...</p>
+    </div>
+    <div v-else style="background: palegreen; text-align: center; border-radius: 5px">
+        <h2>Current Condition</h2>
+        <p>current weather conditions at {{time}}</p>
+        <ul style="text-align: left; display: inline-block">
+            <li>{{sky}}</li>
+            <li>Current tempature is {{temp}} F</li>
+            <li>High is {{highTemp}} F</li>
+            <li>Low is {{lowTemp}} F</li>
+            <li>Humidity is {{humidity}}%</li>
+            <li>{{pressure}} HpA pressure</li>
+        </ul>
+    </div>
+    <div style="background: black; border-radius: 5px">
+        <h2 style="text-align: center; color: ghostwhite">Here is your 5 day 3 hour weather report</h2>
+        <p style="text-align: center; color: snow; border-radius: 5px"> <span style="color: lawngreen">{{likely}} day{{pluralize(likely)}} likely, </span><span style="color: red">{{unlikely}} day{{pluralize(unlikely)}} are unlikely, </span>
+                <span style="color: darkorchid">{{neutral}} day{{pluralize(neutral)}} remain neutral.</span></p>
+        <div v-if="allWeather === undefined">
+        <h2>Please wait while the weather is being retrieved...</h2>
+        </div>
+
+        <div style="border-radius: 5px; margin: 10px 100px 10px 100px" v-else v-for="(w, dexNum) in allWeather"
+             :class="{likely: w.likely, unlikely: w.likely == false, neutral: w.likely == undefined}"
+             v-on:click="toggle"
+             :data-index="dexNum"
+             style="margin: 10px 10px 10px 10px; cursor: pointer; text-align: center"
+        >
+            <p> Conditions for {{w.dt_txt}} </p>
+            <ul style="display: inline-block; text-align: left">
+                <li>The temp is {{w.main.temp}} F</li>
+                <li>{{w.weather[0].description}}</li>
+                <li>The high will be{{w.main.temp_max}} F</li>
+                <li>The low will be{{w.main.temp_min}} F</li>
+                <li>Humidity is {{w.main.humidity}}%</li>
+                <li>Hpa pressure is {{w.main.pressure}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                allWeather: undefined,
+                'title': 'The Current Weather for Today is:',
+                'weather': "this is the weather app",
+                'longitude': undefined,
+                'latitude': undefined,
+                'city': undefined,
+                'state': undefined,
+                'country': undefined,
+                'temp': undefined,
+                'highTemp': undefined,
+                'lowTemp': undefined,
+                'humidity': undefined,
+                'pressure': undefined,
+                'sky': undefined,
+                'time': undefined,
+            };
+        },
+        created() {
+                this.time = new Date().toLocaleString()
+            fetch("https://ipgeolocation.abstractapi.com/v1/?api_key=ad717f7c7e62455382311ccca2abca30")
+                .then(response => {
+                    return response.json();
+                })
+                .then(json => {
+                    this.latitude = json.latitude;
+                    this.longitude = json.longitude;
+                    this.city = json.city;
+                    this.state = json.region;
+                    this.country = json.country;
+
+                    return fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${this.latitude}&lon=${this.longitude}&appid=e1b5465632933e1cf96c736ddf79647a&units=imperial`)
+                })
+                .then(response => {
+                    return response.json();
+                })
+                .then(json => {
+                    this.temp = json.main.temp;
+                    this.highTemp = json.main.temp_max;
+                    this.lowTemp = json.main.temp_min;
+                    this.humidity = json.main.humidity;
+                    this.pressure = json.main.pressure;
+                    this.sky = json.weather[0].description;
+                    console.log(json)
+                    return fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${this.latitude}&lon=${this.longitude}&appid=e1b5465632933e1cf96c736ddf79647a&units=imperial`)
+                })
+                .then(response => {
+                    return response.json();
+                })
+                .then(json => {
+                    console.log(json)
+                    this.allWeather = json.list;
+                }).catch( err => {
+                let error_div = document.createElement('div');
+                error_div.style.backgroundColor = 'yellow';
+                error_div.style.textAlign = 'center';
+                error_div.style.borderRadius = '5px 5px 5px 5px';
+
+                let err_message = document.createElement('p');
+                err_message.textContent = "Oh no something went wrong. We couldn't retrieve the weather report try again later";
+                error_div.appendChild(err_message);
+                document.body.append(error_div);
+         })
+
+        },
+        methods: {
+            toggle(ev) {
+                let idx = ev.currentTarget.getAttribute('data-index');
+                let current = this.allWeather[idx];
+                if (current.likely){
+                    current.likely = false;
+                }
+                else if (current.likely == false){
+                    current.likely = undefined;
+                }
+                else{
+                    current.likely = true;
+                }
+            },
+            pluralize(n) { return n == 1 ? '' : 's'; },
+        },
+        computed: {
+            likely() {
+                let a = 0;
+                for (let i in this.allWeather){
+                    if(this.allWeather[i].likely){
+                        a++;
+                    }
+                }
+                return a;
+            },
+             unlikely() {
+                let a = 0;
+                for (let i in this.allWeather){
+                    if(this.allWeather[i].likely === false){
+                        a++;
+                    }
+                }
+                return a;
+            },
+             neutral() {
+                let a = 0;
+                for (let i in this.allWeather){
+                    if(this.allWeather[i].likely === undefined){
+                        a++;
+                    }
+                }
+                return a;
+             },
+        }
+    });
+    const vm = app.mount("#currentWeather");
+</script>
