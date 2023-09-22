@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Graph {
     int vertexCt;  // Number of vertices in the graph.
-    int[][] capacity;  // Adjacency  matrix
+    int[][] capacity;  // Adjacency  matrix.
     String graphName;  //The file from which the graph was created.
     int[][] residual;
     Boolean[] visited;
