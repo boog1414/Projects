@@ -37,7 +37,7 @@ public class ConwaysLife {
     public static void render(LifeSimulator simulation, Screen screen, TextGraphics graphics) {
         screen.clear();
 
-        // Not very interesting, but showing how to set characters
+        // showing how to set characters
         for (int y = 0; y < simulation.getSizeY(); y++){
             for (int x = 0; x < simulation.getSizeX(); x++){
                 if (simulation.getCell(x, y)){
