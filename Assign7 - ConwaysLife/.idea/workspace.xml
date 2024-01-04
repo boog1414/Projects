@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4aac3e59-b25b-4cd7-9a88-7387c25c8436" name="Default Changelist" comment="Conways Game of Life" />
+    <list default="true" id="4aac3e59-b25b-4cd7-9a88-7387c25c8436" name="Default Changelist" comment="Conways Game of Life">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assign7 - ConwaysLife/com/googlecode/lanterna/TextCharacter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assign7 - ConwaysLife/com/googlecode/lanterna/TextCharacter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assign7 - ConwaysLife/com/googlecode/lanterna/graphics/AbstractTheme.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assign7 - ConwaysLife/com/googlecode/lanterna/graphics/AbstractTheme.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assign7 - ConwaysLife/com/googlecode/lanterna/gui2/dialogs/ActionListDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assign7 - ConwaysLife/com/googlecode/lanterna/gui2/dialogs/ActionListDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assign7 - ConwaysLife/com/googlecode/lanterna/screen/TerminalScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assign7 - ConwaysLife/com/googlecode/lanterna/screen/TerminalScreen.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,20 +33,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/bryso/Projects/Assign9 - Spell Checker",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/BOOG/Documents/Projects/Assign7 - ConwaysLife&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
       <recent name="" />
@@ -91,6 +97,8 @@
       <option name="presentableId" value="Default" />
       <updated>1571942556291</updated>
       <workItem from="1695358034091" duration="409000" />
+      <workItem from="1699312991050" duration="13972000" />
+      <workItem from="1699742659677" duration="622000" />
     </task>
     <task id="LOCAL-00001" summary="Conways Game of Life">
       <created>1695358147755</created>

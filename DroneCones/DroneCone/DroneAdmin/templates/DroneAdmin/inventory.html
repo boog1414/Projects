@@ -1,0 +1,80 @@
+{% extends 'DroneAdmin/base.html' %}
+
+{% block title %}Inventory{% endblock %}
+{% block heading %}Inventory{% endblock %}
+
+{% block content %}
+<section class="mb-8">
+    <h2 class="text-2xl font-semibold mb-4">Ice Cream Flavors</h2>
+    <table class="min-w-full divide-y divide-gray-200 shadow bg-gray-100">
+        <thead>
+            <tr>
+                <th class="px-6 py-3">Flavor</th>
+                <th class="px-6 py-3">Quantity</th>
+                <th class="px-6 py-3">Price</th>
+                <th class="px-6 py-3">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ice_cream in ice_creams %}
+                <tr>
+                    <td class="px-6 py-3 whitespace-nowrap text-center">{{ ice_cream.flavor }}</td>
+                    <td class="px-6 py-3 whitespace-nowrap text-center">{{ ice_cream.qty }}</td>
+                    <td class="px-6 py-3 whitespace-nowrap text-center">${{ ice_cream.price }}</td>
+                    <td class="px-6 py-3 whitespace-nowrap text-center">
+                        <button onclick="window.location.href='{% url 'add_ice_cream' ice_cream.id %}'" class="bg-blue-500 text-white px-4 py-2 rounded-md">Edit</button>
+                        <button onclick="window.location.href='{% url 'delete_ice_cream' ice_cream.id %}'" class="bg-red-500 text-white px-4 py-2 rounded-md">Delete</button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button onclick="window.location.href='{% url 'add_ice_cream' %}'" class="bg-green-500 text-white px-4 py-2 my-2 rounded-md">Add</button>
+    <h2 class="text-2xl font-semibold mb-4 mt-4">Cones</h2>
+    <table class="min-w-full divide-y divide-gray-200 shadow bg-gray-100">
+        <thead>
+            <th class="px-6 py-3">Name</th>
+            <th class="px-6 py-3">Quantity</th>
+            <th class="px-6 py-3">Price</th>
+            <th class="px-6 py-3">Actions</th>
+        </thead>
+        <tbody>
+            {% for cone in cones %}
+                <tr>
+                   <td class="px-6 py-3 whitespace-nowrap text-center">{{ cone.name }}</td>
+                    <td class="px-6 py-3 whitespace-nowrap text-center">{{ cone.qty }}</td>
+                    <td class="px-6 py-3 whitespace-nowrap text-center">${{ cone.price }}</td>
+                    <td class="px-6 py-3 whitespace-nowrap">
+                        <button onclick="window.location.href='{% url 'add_cone' cone.id %}'" class="bg-blue-500 text-white px-4 py-2 rounded-md">Edit</button>
+                        <button onclick="window.location.href='{% url 'delete_cone' cone.id %}'" class="bg-red-500 text-white px-4 py-2 rounded-md">Delete</button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button onclick="window.location.href='{% url 'add_cone' %}'" class="bg-green-500 text-white px-4 py-2 my-2 rounded-md">Add</button>
+    <h2 class="text-2xl font-semibold mb-4 mt-4">Toppings</h2>
+    <table class="min-w-full divide-y divide-gray-200 shadow bg-gray-100">
+        <thead>
+            <th class="px-6 py-3">Name</th>
+            <th class="px-6 py-3">Quantity</th>
+            <th class="px-6 py-3">Price</th>
+            <th class="px-6 py-3">Actions</th>
+        </thead>
+        <tbody>
+            {% for topping in toppings %}
+                <tr>
+                    <td class="px-6 py-3 whitespace-nowrap text-center">{{ topping.name }}</td>
+                    <td class="px-6 py-3 whitespace-nowrap text-center">{{ topping.qty }}</td>
+                    <td class="px-6 py-3 whitespace-nowrap text-center">${{ topping.price }}</td>
+                    <td class="px-6 py-3 whitespace-nowrap">
+                        <button onclick="window.location.href='{% url 'add_topping' topping.id %}'" class="bg-blue-500 text-white px-4 py-2 rounded-md">Edit</button>
+                        <button onclick="window.location.href='{% url 'delete_topping' topping.id %}'" class="bg-red-500 text-white px-4 py-2 rounded-md">Delete</button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button onclick="window.location.href='{% url 'add_topping' %}'" class="bg-green-500 text-white px-4 py-2 my-2 rounded-md">Add</button>
+</section>
+{% endblock %}
